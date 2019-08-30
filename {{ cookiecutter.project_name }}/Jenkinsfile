@@ -1,0 +1,71 @@
+def send_slack_notification() {
+    def color_map = ['SUCCESS': 'good', 'FAILURE': 'danger', 'UNSTABLE': 'danger', 'ABORTED': 'danger']
+    slackSend color: color_map[currentBuild.currentResult],
+                message: """*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}
+More info at: ${env.BUILD_URL}"""
+}
+
+pipeline {
+  agent any
+
+  triggers {
+    pollSCM '* * * * *'
+    cron("H H(2-5) * * *")
+  }
+
+  options {
+    disableConcurrentBuilds()
+    checkoutToSubdirectory('{{ cookiecutter.project_name }}')
+    skipDefaultCheckout()
+  }
+
+  stages {
+    stage('clear workspace and checkout source code') {
+      steps {
+        deleteDir()
+        dir('{{ cookiecutter.project_name }}') {
+          checkout scm
+        }
+      }
+    }
+    stage("Cloning Inmanta core"){
+      steps{
+        dir('inmanta'){
+            git branch: "master", url: 'https://github.com/inmanta/inmanta.git', poll: false, changelog: false
+        }
+      }
+    }
+    stage("Setup virtualenv"){
+      steps{
+        sh '''
+          # Setup venv
+          python3 -m venv ${WORKSPACE}/env
+          ${WORKSPACE}/env/bin/python3 -m pip install -c ${WORKSPACE}/{{ cookiecutter.project_name }}/requirements.txt -U tox tox-venv setuptools pip
+          source ${WORKSPACE}/env/bin/activate
+          # build sdist of testing extension from source
+          extra_dist=${WORKSPACE}/{{ cookiecutter.project_name }}/extra_dist
+          cd inmanta/tests_common
+          python3 copy_files_from_core.py
+	      python3 setup.py sdist --dist-dir $extra_dist
+          cd ..
+          cd ..
+        '''
+      }
+    }
+    stage("Run tests"){
+      steps{
+        sh "${WORKSPACE}/env/bin/python -m tox -c {{ cookiecutter.project_name }}"
+      }
+    }
+  }
+  post {
+    changed{
+      send_slack_notification()
+    }
+    always{
+        cobertura coberturaReportFile: '{{ cookiecutter.project_name }}/coverage/cobertura.xml', failNoReports: false, failUnhealthy: false,
+
+        failUnstable: false
+    }
+  }
+}
