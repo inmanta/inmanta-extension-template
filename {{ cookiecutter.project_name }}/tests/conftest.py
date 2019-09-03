@@ -43,7 +43,7 @@ def {{ cookiecutter.extension_name }}_config(server_config, postgres_db, databas
 
 
 @pytest.fixture
-async def server(lsm_config, server_config):
+async def server({{ cookiecutter.extension_name }}_config, server_config):
     """
     Override standard inmanta server to allow more config to be injected
     """
