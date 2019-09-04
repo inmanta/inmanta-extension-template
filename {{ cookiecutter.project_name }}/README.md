@@ -22,17 +22,9 @@ $ make format
 
 ## Run tests
 
-Tests can be run using make or using tox. In contrast to make, tox
-creates its own Python virtualenv. This way tox can run the same test
-suite for different versions of the Python interpreter.
-
-### Using make:
-
-```bash
-$ make pep8  # Run pep8 style checks
-$ make tests # Run unit tests
-$ make mypy  # Run mypy type checks
-```
+Tests can be run using tox, which creates its own virtualenv. This way
+tox can run the same test suite for different versions of the Python
+interpreter.
 
 ### Using tox:
 
