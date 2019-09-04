@@ -25,6 +25,7 @@
 {%- endif %}
 
 from inmanta.server.protocol import ServerSlice
+from inmanta.server import SLICE_TRANSPORT
 from inmanta.server.protocol import Server
 from typing import List
 
@@ -50,4 +51,5 @@ class {{ cookiecutter.slice_class_name }}(ServerSlice):
         return []
 
     def get_depended_by(self) -> List[str]:
-        return []
+        # Ensure we are started before the HTTP endpoint becomes available
+        return [SLICE_TRANSPORT]

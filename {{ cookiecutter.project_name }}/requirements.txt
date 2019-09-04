@@ -1,5 +1,4 @@
 inmanta
-pytest-inmanta-extensions
 pep8-naming
 flake8
 flake8-black
