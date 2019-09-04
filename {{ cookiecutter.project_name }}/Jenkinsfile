@@ -1,10 +1,3 @@
-def send_slack_notification() {
-    def color_map = ['SUCCESS': 'good', 'FAILURE': 'danger', 'UNSTABLE': 'danger', 'ABORTED': 'danger']
-    slackSend color: color_map[currentBuild.currentResult],
-                message: """*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}
-More info at: ${env.BUILD_URL}"""
-}
-
 pipeline {
   agent any
 
@@ -59,9 +52,6 @@ pipeline {
     }
   }
   post {
-    changed{
-      send_slack_notification()
-    }
     always{
         cobertura coberturaReportFile: '{{ cookiecutter.project_name }}/coverage/cobertura.xml', failNoReports: false, failUnhealthy: false,
 
