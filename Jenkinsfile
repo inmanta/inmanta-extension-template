@@ -13,17 +13,18 @@ pipeline {
   }
 
   stages {
-    stage("Cleanup environment"){
+    stage("clear workspace and checkout source code"){
       steps{
-        sh '''
-          rm -rf project env
-          python3 -m venv ${WORKSPACE}/env
-        '''
+        deleteDir()
+        dir('inmanta-extension-template') {
+          checkout scm
+        }
       }
     }
     stage("Setup extension project via cookiecutter"){
       steps{
         sh '''
+          python3 -m venv ${WORKSPACE}/env
           source ${WORKSPACE}/env/bin/activate
           pip install -c ${WORKSPACE}/inmanta-extension-template/requirements.txt cookiecutter
           # This creates an Inmanta extension project called 'project'
