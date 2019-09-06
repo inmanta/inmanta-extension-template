@@ -32,7 +32,6 @@ import pytest
 
 from inmanta import config
 from inmanta.server.bootloader import InmantaBootloader
-from inmanta_tests.conftest import *  # noqa: F401, F403
 
 logger = logging.getLogger(__name__)
 
