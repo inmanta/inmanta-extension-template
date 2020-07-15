@@ -1,5 +1,5 @@
 cookiecutter==1.7.2
-tox==3.16.1
+tox==3.17.0
 tox-venv==0.4.0
 isort==4.3.21
 black==19.10b0
