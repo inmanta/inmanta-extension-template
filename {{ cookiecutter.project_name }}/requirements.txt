@@ -4,9 +4,11 @@ flake8
 flake8-black
 isort<5.0.0
 flake8-isort
+flake8-copyright
 black
 tox
 tox-venv
 pytest
 pytest-randomly
 pytest-asyncio
+pytest-inmanta-extensions
