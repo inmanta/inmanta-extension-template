@@ -2,7 +2,7 @@ git+https://github.com/inmanta/inmanta.git
 pep8-naming
 flake8
 flake8-black
-isort<5.0.0
+isort<6.0.0
 flake8-isort
 flake8-copyright
 black
