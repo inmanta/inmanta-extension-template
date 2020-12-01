@@ -1,4 +1,4 @@
-git+https://github.com/inmanta/inmanta.git
+inmanta
 pep8-naming
 flake8
 flake8-black
