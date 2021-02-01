@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 requires = [
-    "inmanta",
+    "inmanta-core",
 ]
 
 namespace_packages = ["inmanta_ext.{{ cookiecutter.extension_name }}"]
