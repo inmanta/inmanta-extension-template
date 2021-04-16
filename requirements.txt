@@ -1,5 +1,5 @@
 cookiecutter==1.7.2
-inmanta-dev-dependencies[extension]==1.30.0
+inmanta-dev-dependencies[extension]==1.31.0
 
 # Transitive dependencies
 appdirs==1.4.4
