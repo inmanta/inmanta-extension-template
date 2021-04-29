@@ -5,13 +5,4 @@ updates:
   schedule:
     interval: daily
   open-pull-requests-limit: 99
-  ignore:
-  - dependency-name: importlib-metadata
-    versions:
-    - "> 3.1.0, < 4"
-  - dependency-name: inmanta-dev-dependencies[extension]
-    versions:
-    - 1.19.0
-  - dependency-name: virtualenv
-    versions:
-    - 20.4.1
+  
