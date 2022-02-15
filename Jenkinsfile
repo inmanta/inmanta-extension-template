@@ -2,7 +2,6 @@ pipeline {
   agent any
 
   triggers {
-    pollSCM '* * * * *'
     cron("H H(2-5) * * *")
   }
 
@@ -44,7 +43,7 @@ pipeline {
     stage("Run tests"){
       steps{
         sh '''
-          ${WORKSPACE}/env/bin/tox -c ${WORKSPACE}/project -e pep8,py36
+          ${WORKSPACE}/env/bin/tox -c ${WORKSPACE}/project -e pep8,py39
         '''
       }
     }
