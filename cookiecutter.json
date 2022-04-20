@@ -6,7 +6,7 @@
   "license": "ASL 2.0",
   "copyright": "{% now 'local', '%Y' %} Inmanta",
   "git_repo_url": "https://github.com/inmanta/{{ cookiecutter.project_name }}",
-  "minimum_python_version": "3.6",
+  "minimum_python_version": "3.9",
   "extension_name": "extension_name",
   "extension_version": "1.0",
   "slice_name": "slice_name",
