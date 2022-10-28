@@ -30,3 +30,6 @@ from {{ cookiecutter.slice_package_name }}.{{ cookiecutter.slice_name }} import 
 
 def setup(application: ApplicationContext) -> None:
     application.register_slice({{ cookiecutter.slice_class_name }}())
+
+def register_environment_settings(application: ApplicationContext) -> None:
+    pass
