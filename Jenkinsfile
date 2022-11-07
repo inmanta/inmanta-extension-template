@@ -5,6 +5,10 @@ pipeline {
     cron("H H(2-5) * * *")
   }
 
+  environment {
+    PIP_INDEX_URL='https://artifacts.internal.inmanta.com/inmanta/dev'
+  }
+
   options {
     disableConcurrentBuilds()
     checkoutToSubdirectory('inmanta-extension-template')
@@ -43,6 +47,7 @@ pipeline {
     stage("Run tests"){
       steps{
         sh '''
+          export PIP_PRE="true"
           ${WORKSPACE}/env/bin/tox -c ${WORKSPACE}/project -e pep8,py39
         '''
       }
