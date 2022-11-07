@@ -30,6 +30,8 @@ pipeline {
           python3 -m venv ${WORKSPACE}/env
           source ${WORKSPACE}/env/bin/activate
           pip install -c ${WORKSPACE}/inmanta-extension-template/requirements.txt cookiecutter
+          # This extension may only be compatible with the latest dev release
+          pip install -c ${WORKSPACE}/inmanta-extension-template/requirements.txt -U --pre inmanta-core
           # This creates an Inmanta extension project called 'project'
           cookiecutter --no-input ${WORKSPACE}/inmanta-extension-template
         '''
@@ -47,7 +49,6 @@ pipeline {
     stage("Run tests"){
       steps{
         sh '''
-          export PIP_PRE="true"
           ${WORKSPACE}/env/bin/tox -c ${WORKSPACE}/project -e pep8,py39
         '''
       }
