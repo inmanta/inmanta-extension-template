@@ -5,6 +5,10 @@ pipeline {
     cron("H H(2-5) * * *")
   }
 
+  environment {
+    PIP_INDEX_URL='https://artifacts.internal.inmanta.com/inmanta/dev'
+  }
+
   options {
     disableConcurrentBuilds()
     checkoutToSubdirectory('inmanta-extension-template')
