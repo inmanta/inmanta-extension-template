@@ -1,2 +1,2 @@
 cookiecutter==2.3.0
-inmanta-dev-dependencies[extension]==2.80.0
+inmanta-dev-dependencies[extension]==2.81.0
