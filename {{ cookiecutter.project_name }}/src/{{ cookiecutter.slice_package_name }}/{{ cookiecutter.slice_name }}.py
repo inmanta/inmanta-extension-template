@@ -35,7 +35,7 @@ from inmanta.types import Apireturn
 @method(path="/hello-world", operation="GET", client_types=["api"])
 def hello_world():
     """
-        Basic hello-world API endpoint.
+    Basic hello-world API endpoint.
     """
 
 
@@ -65,6 +65,6 @@ class {{ cookiecutter.slice_class_name }}(ServerSlice):
     @protocol.handle(hello_world)
     async def hello_world_handle(self) -> Apireturn:
         """
-            Handle for the hello_world API endpoint.
+        Handle for the hello_world API endpoint.
         """
         return 200, {"data": "hello-world"}
