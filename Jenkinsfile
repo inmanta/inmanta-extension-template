@@ -29,8 +29,7 @@ pipeline {
         sh '''
           python3 -m venv ${WORKSPACE}/env
           source ${WORKSPACE}/env/bin/activate
-          # Install the cookiecutter package. We use -r here because -c cannot be used together with constraints.
-          pip install -r ${WORKSPACE}/inmanta-extension-template/requirements.txt cookiecutter
+          pip install -c ${WORKSPACE}/inmanta-extension-template/requirements.txt cookiecutter
           # This creates an Inmanta extension project called 'project'
           cookiecutter --no-input ${WORKSPACE}/inmanta-extension-template
         '''
