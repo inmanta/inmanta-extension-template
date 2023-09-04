@@ -40,7 +40,7 @@ pipeline {
         sh '''
           source ${WORKSPACE}/env/bin/activate
           pip install -c ${WORKSPACE}/project/requirements.txt -U tox setuptools pip isort black
-          make -C ${WORKSPACE}/project build-pytest-inmanta-extensions format
+          make -C ${WORKSPACE}/project build-pytest-inmanta-extensions pep8
         '''
       }
     }
