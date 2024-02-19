@@ -30,14 +30,14 @@ interpreter.
 
 ```bash
 $ tox -e pep8  # Run pep8 style checks
-$ tox -e py39  # Run unit tests with a python3.9 interpreter
+$ tox -e py311 # Run unit tests with a python3.11 interpreter
 $ tox -e mypy  # Run mypy type checks
 ```
 
 Run multiple environments:
 
 ```bash
-$ tox # Run the pep8, py39 and mypy in sequence
+$ tox # Run the pep8, py311 and mypy in sequence
 ```
 
 ## Install package

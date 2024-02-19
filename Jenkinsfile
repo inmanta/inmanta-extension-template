@@ -47,7 +47,7 @@ pipeline {
     stage("Run tests"){
       steps{
         sh '''
-          ${WORKSPACE}/env/bin/tox -c ${WORKSPACE}/project -e pep8,py39
+          ${WORKSPACE}/env/bin/tox -c ${WORKSPACE}/project -e pep8,py311
         '''
       }
     }
