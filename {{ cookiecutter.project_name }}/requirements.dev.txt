@@ -1,4 +1,4 @@
 # Guide pip in finding appropriate versions by using the bound extra for pytest-inmanta-extensions.
 inmanta-core[pytest-inmanta-extensions]
-inmanta-dev-dependencies[pytest,async,extension]==2.121.0
+inmanta-dev-dependencies[pytest,async,extension]==2.122.0
 bumpversion==0.6.0
