@@ -45,10 +45,12 @@ pipeline {
     }
     stage("Run tests"){
       steps{
-        sh '''
-          ${WORKSPACE}/env/bin/flake8 src tests
-          ${WORKSPACE}/env/bin/pytest tests
-        '''
+        dir('project') {
+          sh '''
+            ${WORKSPACE}/env/bin/flake8 src tests
+            ${WORKSPACE}/env/bin/pytest tests
+          '''
+        }
       }
     }
   }
