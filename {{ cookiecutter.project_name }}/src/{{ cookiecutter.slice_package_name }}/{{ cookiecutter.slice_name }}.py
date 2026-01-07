@@ -26,12 +26,15 @@ Contact: {{ cookiecutter.author_email }}
 
 from typing import List
 
+from inmanta import const
+from inmanta.protocol.auth.decorators import auth
 from inmanta.protocol.decorators import method
 from inmanta.server import SLICE_TRANSPORT, protocol
 from inmanta.server.protocol import Server, ServerSlice
 from inmanta.types import Apireturn
 
 
+@auth(auth_label=const.CoreAuthorizationLabel.TEST, read_only=True)
 @method(path="/hello-world", operation="GET", client_types=["api"])
 def hello_world():
     """

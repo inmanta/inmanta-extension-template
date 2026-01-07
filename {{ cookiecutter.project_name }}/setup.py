@@ -22,9 +22,16 @@ setup(
     # Packaging
     package_dir={"": "src"},
     packages= namespace_packages + find_packages("src"),
-    package_data={"": ["misc/*", "docs/*"]},
+    package_data={"": []},
     include_package_data=True,
     install_requires=requires,
     entry_points={
+    },
+    extras_require={
+        "dev": [
+            "inmanta-core[pytest-inmanta-extensions]",
+            "inmanta-dev-dependencies[pytest,async,extension]",
+            "bumpversion",
+        ],
     },
 )

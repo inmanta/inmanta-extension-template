@@ -39,16 +39,18 @@ pipeline {
       steps{
         sh '''
           source ${WORKSPACE}/env/bin/activate
-          pip install -c ${WORKSPACE}/project/requirements.txt -U tox setuptools pip isort black
-          make -C ${WORKSPACE}/project build-pytest-inmanta-extensions pep8
+          pip install -c ${WORKSPACE}/project/requirements.txt ${WORKSPACE}/project[dev]
         '''
       }
     }
     stage("Run tests"){
       steps{
-        sh '''
-          ${WORKSPACE}/env/bin/tox -c ${WORKSPACE}/project -e pep8,py311
-        '''
+        dir('project') {
+          sh '''
+            ${WORKSPACE}/env/bin/flake8 src tests
+            ${WORKSPACE}/env/bin/pytest tests
+          '''
+        }
       }
     }
   }
