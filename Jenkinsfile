@@ -39,7 +39,7 @@ pipeline {
       steps{
         sh '''
           source ${WORKSPACE}/env/bin/activate
-          pip install -r ${WORKSPACE}/project/requirements.txt ${WORKSPACE}/project
+          pip install -c ${WORKSPACE}/project/requirements.txt ${WORKSPACE}/project[dev]
         '''
       }
     }
