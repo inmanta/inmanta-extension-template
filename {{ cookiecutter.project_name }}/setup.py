@@ -27,4 +27,11 @@ setup(
     install_requires=requires,
     entry_points={
     },
+    extras_require={
+        "dev": [
+            "inmanta-core[pytest-inmanta-extensions]",
+            "inmanta-dev-dependencies[pytest,async,extension]",
+            "bumpversion",
+        ],
+    },
 )
