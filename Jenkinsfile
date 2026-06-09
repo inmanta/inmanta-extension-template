@@ -27,7 +27,9 @@ pipeline {
     stage("Setup extension project via cookiecutter"){
       steps{
         sh '''
-          python3 -m venv ${WORKSPACE}/env
+          python_version=$(python3 -c "import json; print(json.load(open('${WORKSPACE}/inmanta-extension-template/cookiecutter.json'))['minimum_python_version'])")
+          python_binary="python${python_version}"
+          ${python_binary} -m venv ${WORKSPACE}/env
           source ${WORKSPACE}/env/bin/activate
           pip install -c ${WORKSPACE}/inmanta-extension-template/requirements.txt cookiecutter
           # This creates an Inmanta extension project called 'project'
