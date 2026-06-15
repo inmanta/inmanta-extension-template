@@ -27,7 +27,7 @@ This command will prompt for the template parameters.
 | license                | ASL 2.0                                                  | The License of this new Inmanta extension.                         |
 | copyright              | ${year} Inmanta                                          | The owner of the copyright of the extension.                       |
 | git_repo_url           | https://github.com/inmanta/{{cookiecutter.project_name}} | The URL to the Git repository where this extension will be stored. |
-| minimum_python_version | 3.6                                                      | The minimum Python version required to run this extension.         |
+| minimum_python_version | 3.12                                                     | The minimum Python version required to run this extension.         |
 | extension_name         | extension_name                                           | The name of the Inmanta extension.                                 |
 | extension_version      | 1.0                                                      | The version of this extension.                                     |
 | slice_name             | slice_name                                               | The name of the first server slice of this extension.              |
