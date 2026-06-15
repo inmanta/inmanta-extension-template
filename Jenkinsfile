@@ -7,7 +7,6 @@ pipeline {
 
   environment {
     UV_DEFAULT_INDEX='https://artifacts.internal.inmanta.com/inmanta/dev'
-    UV_PRERELEASE='allow'
   }
 
   options {
