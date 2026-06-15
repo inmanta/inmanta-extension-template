@@ -7,6 +7,8 @@ pipeline {
 
   environment {
     PIP_INDEX_URL='https://artifacts.internal.inmanta.com/inmanta/dev'
+    UV_DEFAULT_INDEX='https://artifacts.internal.inmanta.com/inmanta/dev'
+    UV_PRERELEASE='allow'
   }
 
   options {
@@ -27,16 +29,12 @@ pipeline {
     stage("Setup extension project via cookiecutter"){
       steps{
         sh '''
-          if [ "${BRANCH_NAME}" = "master" ]; then
-              doc_version="latest"
-          else
-              doc_version=$(echo "${BRANCH_NAME}" | sed 's/^iso//')
-          fi
-          python_version=$(curl -L "https://docs.inmanta.com/inmanta-service-orchestrator-dev/${doc_version}/reference/compatibility.json" | jq -r .system_requirements.python_version)
-          python_binary="python${python_version}"
-          ${python_binary} -m venv ${WORKSPACE}/env
+          # Derive the required Python version from the latest compatibility.json on docs.inmanta.com.
+          python_version=$(curl -L "https://docs.inmanta.com/inmanta-service-orchestrator-dev/latest/reference/compatibility.json" | jq -r .system_requirements.python_version)
+          # Let uv fetch the required Python version and build the venv with it.
+          uv venv -p ${python_version} ${WORKSPACE}/env
           source ${WORKSPACE}/env/bin/activate
-          pip install -c ${WORKSPACE}/inmanta-extension-template/requirements.txt cookiecutter
+          uv pip install -c ${WORKSPACE}/inmanta-extension-template/requirements.txt cookiecutter
           # This creates an Inmanta extension project called 'project'
           cookiecutter --no-input ${WORKSPACE}/inmanta-extension-template
         '''
@@ -46,7 +44,7 @@ pipeline {
       steps{
         sh '''
           source ${WORKSPACE}/env/bin/activate
-          pip install -c ${WORKSPACE}/project/requirements.txt ${WORKSPACE}/project[dev]
+          uv pip install -c ${WORKSPACE}/project/requirements.txt ${WORKSPACE}/project[dev]
         '''
       }
     }
