@@ -1,2 +1,2 @@
-inmanta-dev-dependencies==2.211.0
+inmanta-dev-dependencies==2.212.0
 bumpversion==0.6.0
